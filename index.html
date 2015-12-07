@@ -16,8 +16,8 @@
       }
       var formEl = document.getElementById('one'); // находим нашу форму
       console.log(formEl);
-      var newEL = document.createElement('label'); // создаем новый элемент с тэгом label
-      newEL.innerHTML = 'Developers';// помещаем контент внутрь нового созданного элемента
+      var newEL = document.createElement(key); // создаем новый элемент с тэгом label
+      newEL.innerHTML = value;// помещаем контент внутрь нового созданного элемента
       formEl.appendChild(newEL);// добавляемнового ребенка нашей форме
 
       var newInput = document.createElement('input'); // создаем новый элемент с тэгом input

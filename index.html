@@ -8,15 +8,21 @@
   </form>
     <script>
       var formH = {label:'Developers',} // создаем хэш элементов формы
+
+      var key,value; // достаем значения из хэша
+      for(key in formH){ // цикл по ключу key хэша formH
+        value = formH[key]; // значения по ключу key
+        console.log('key - ', key,'; value - ', value); // вывод в консоль, интересный формат вывода
+      }
       var formEl = document.getElementById('one'); // находим нашу форму
       console.log(formEl);
       var newEL = document.createElement('label'); // создаем новый элемент с тэгом label
       newEL.innerHTML = 'Developers';// помещаем контент внутрь нового созданного элемента
       formEl.appendChild(newEL);// добавляемнового ребенка нашей форме
 
-      var newInput = document.createElement('input');
-      newInput.innerHTML = 'type = "text"';
-      formEl.appendChild(newInput);
+      var newInput = document.createElement('input'); // создаем новый элемент с тэгом input
+      newInput.innerHTML = 'type = "text"'; // помещаем контент внутрь элемента с тегом input
+      newEL.appendChild(newInput); // элементу с тэгом label добавляем нового ребенка с тэгом input
 
     </script>
 

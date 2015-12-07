@@ -4,6 +4,17 @@
     <title>Dyn_Form</title>
   </head>
   <body>
+    <form id = 'one'>
+  </form>
+    <script>
+      var formH = {label:'Developers',} // создаем хэш элементов формы
+      var formEl = document.getElementById('one'); // находим нашу форму
+      console.log(formEl);
+      var newEL = document.createElement('label'); // создаем новый элемент с тэгом label
+      newEL.innerHTML = 'Developers';// помещаем контент внутрь нового созданного элемента
+      formEl.appendChild(newEL);// добавляемнового ребенка нашей форме
+
+    </script>
 
   </body>
 </html>

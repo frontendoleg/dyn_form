@@ -9,13 +9,23 @@
 
     <script>
     var formAh = [
-    {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 0
-    {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 1
-    {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 2
+    {'labelkeys':'my_label','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 0
+    {'labelkeys':null,'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 1
+    {'labelkeys':'another_label','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 2
     ]; // сохраняем массив
 
     function createFormContent(myDataFormAh){ // создает контент для помещения в форму. Принимает массив хэшей поля формы
-      return '<p>ofifenno</p>'
+      var content = "" // контент - переменная, в которую будет собираться код формы
+      for(var i=0;i<myDataFormAh.length;i++){ // перебираем строки массива для формы
+        var formH = myDataFormAh[i];  // берем очередную строку
+          for(var key in formH){ // перебираем ключи внутри строки
+            switch(key){
+              case 'labelkeys': // Проверяем, если это labelkeys
+                console.log(formH[key],'i=',i)
+            }
+          }
+      }
+      return content;
     }
     function fillForm(dataFormAh,nameForm){ // заполняет форму подготовленным контентом. Принимает массив хэшей, имя формы
       var formElement = document.forms[nameForm]; // мы находим нужную форму по имени

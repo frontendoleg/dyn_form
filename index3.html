@@ -21,7 +21,11 @@
           for(var key in formH){ // перебираем ключи внутри строки
             switch(key){
               case 'labelkeys': // Проверяем, если это labelkeys
-                console.log(formH[key],'i=',i)
+                // console.log(formH[key],'i=',i)
+                if (formH[key]){
+                  var elem = document.createElement('label');
+                  console.log(elem);
+                } // создаем элемент label, сохраняем в переменную elem
             }
           }
       }

@@ -1,85 +1,29 @@
 <!DOCTYPE html>
   <head>
     <meta charset = 'utf-8'>
-    <title>Dyn_Form2</title>
+    <title>Dyn_Form_New_Function</title>
   </head>
   <body>
-    <form id = 'myForm'>
+    <form name = 'myform' method = 'get' action = ''> <!-- имя метод и экшн для формы -->
     </form>
 
     <script>
-    var formH = {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}; // сохраняем массив
-    /*var labelV = formH.labelkeys['labelkey']; // получаем значение label - вариант синтаксиса*/
-    // labelkeys - группа ключей label, labelkey - ключ, 'Developers' or null значение поля labelkey
-    var labelV = formH.labelkeys.labelkey; // получаем значение label
-    console.log('labelV - '+labelV);
-    console.log('тип переменной - ', typeof labelV);// тип переменной string for 'null' and object of null
+    var formAh = [
+    {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 0
+    {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 1
+    {'labelkeys':{'labelkey':null},'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 2
+    ]; // сохраняем массив
 
-    function createInputField(){// функция создает элемент формы, принимает на вход, к какому элементу мы назначим поле элемент формы ребенком. Мы можем создать инпут элемент ребенком form или ребенком label. Как прикрепить это к дому?
-
+    function createFormContent(myDataFormAh){ // создает контент для помещения в форму. Принимает массив хэшей поля формы
+      return '<p>ofifenno</p>'
     }
-    var formEl =document.getElementById('myForm'); // находим нашу форму
-    if (formH.labelkeys.labelkey){// проверяем есть ли label и в зависимости от этого размещаем input отдельно или внутри label
-      // есть label
-      var newElLabel = document.createElement('label'); // создаем элемент label
-      newElLabel.innerHTML = labelV; //помещаем текст контент внутрь элемента label
-      formEl.appendChild(newElLabel); // добавляем ребенка, то есть label внутрь Form
-      if(formH.inputkeys.inputkey){
-        // добавляем инпут к label
-        var newElInput = document.createElement('input'); // создаем элемент input
-        var inputkeysV = formH.inputkeys.inputkey; // получаем значение inputkey
-        newElInput.innerHTML = inputkeysV;
-        newElLabel.appendChild(newElInput);// добавляем ребенка, то есть инпут внутрь тэга label
-      }
+    function fillForm(dataFormAh,nameForm){ // заполняет форму подготовленным контентом. Принимает массив хэшей, имя формы
+      var formElement = document.forms[nameForm]; // мы находим нужную форму по имени
+      formElement.innerHTML = createFormContent(dataFormAh); // помещаем в форму контент, созданный функцией createFormContent
     }
-    else{
-      // нет label
-      if(formH.inputkeys.inputkey){
-        // добавляем инпут к form
-        var newElInput = document.createElement('input'); // создаем элемент input
-        var inputkeysV = formH.inputkeys.inputkey; // получаем значение inputkey
-        newElInput.innerHTML = inputkeysV;
-        formEl.appendChild(newElInput);// добавляем ребенка, то есть инпут внутрь тэга Form
-      }
 
-    }// конец проверки есть ли label и в зависимости от этого ставим input. Как еще добавить тип инпута - text, password итд???
-
-      /* Создаем хэш вида
-    [
-      {label:'Developers'},// Developers or null if no label
-      {textarea:'name'}, // name or null if no textarea
-      {inputTxt:'text'}, // text if inputTxt or null if no inputTxt
-      {inputCheckBox:'name',checked:true}, //name if checkbox or null if no checkbox
-      {inputSubmit:value}, //value if inputSubmit or null if no inputSubmit
-      {inputRadio:name, //name or null if no inputRadio
-        {value1:'1',word:'yes',option:'checked'}, //value 1 in code is value=,word - is word after inputRadio, option if checked
-        {value2:'2',word:'no',option:'null'},
-        {value3:'3',word:'don`t know',option:'null'},
-      },
-      {inputSelect:name, //name or null if no inputSelect
-        {value1:'1',word:'cat',option:'selected'}, //value 1 in code is value=,word - is word in inputSelect, option if selected
-        {value2:'2',word:'dog',option:'null'},
-        {value3:'3',word:'bird',option:'null'},
-      }
-    ]
-      var formH = {label:'Developers',} // создаем хэш элементов формы
-
-      var key,value; // достаем значения из хэша
-      for(key in formH){ // цикл по ключу key хэша formH
-        value = formH[key]; // значения по ключу key
-        console.log('key - ', key,'; value - ', value); // вывод в консоль, интересный формат вывода
-      }
-      var formEl = document.getElementById('one'); // находим нашу форму
-      console.log(formEl);
-      var newEL = document.createElement(key); // создаем новый элемент с тэгом label
-      newEL.innerHTML = value;// помещаем контент внутрь нового созданного элемента
-      formEl.appendChild(newEL);// добавляемнового ребенка нашей форме
-
-      var newInput = document.createElement('input'); // создаем новый элемент с тэгом input
-      newInput.innerHTML = 'type = "text"'; // помещаем контент внутрь элемента с тегом input
-      newEL.appendChild(newInput); // элементу с тэгом label добавляем нового ребенка с тэгом input*/
+    fillForm (formAh,'myform'); // вызов функции заполнения формы. На вход функции даем наш массив, имя нашей формы.
 
     </script>
-
   </body>
 </html>

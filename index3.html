@@ -10,14 +10,11 @@
     <script>
     var formAh = [
     {'labelkeys':'my_label','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 0
-    {'labelkeys':null,'textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 1
+    {'labelkeys':'label2','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 1
     {'labelkeys':'another_label','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 2
     ]; // сохраняем массив
 
-    function createFormContent(myDataFormAh){                                            // создает контент для помещения в форму. Принимает массив хэшей поля формы
-      var content = "" // контент - переменная, в которую будет собираться код формы
-      for(var i=0;i<myDataFormAh.length;i++){ // перебираем строки массива для формы
-        var formH = myDataFormAh[i];  // берем очередную строку
+    function createFormContent(formH){                                            // создает контент для помещения в форму. Принимает один хэш поля формы
           for(var key in formH){ // перебираем ключи внутри строки
             switch(key){
               case 'labelkeys': // Проверяем, если это labelkeys
@@ -36,12 +33,17 @@
 
                   //console.log(content);
           }
-      }
       return elem;
     }
     function fillForm(dataFormAh,nameForm){ // заполняет форму подготовленным контентом. Принимает массив хэшей, имя формы
       var formElement = document.forms[nameForm]; // мы находим нужную форму по имени
-      formElement.appendChild(createFormContent(dataFormAh)); // помещаем в форму контент, созданный функцией createFormContent
+      for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
+        var formH = dataFormAh[i]; // берем конкретный хэш
+        console.log (formH);
+        formElement.appendChild(createFormContent(formH));
+        brElement = document.createElement('br');
+        formElement.appendChild(brElement);// добавляем дочерний элемент в форму
+      }
     }
 
     fillForm (formAh,'myform'); // вызов функции заполнения формы. На вход функции даем наш массив, имя нашей формы.

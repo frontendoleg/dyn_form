@@ -9,24 +9,30 @@
 
     <script>
     var formAh = [
-    {'labelkeys':'my_label','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 0
-    {'labelkeys':'label2','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 1
-    {'labelkeys':'another_label','textareakeys':{'textareakey': 'null'},'inputkeys':{'inputkey': 'txt'},}, // field 2
+    {'labelkey':null,'inputkey':'text'}, // field 0
+    {'labelkey':'label2','inputkey':'text'}, // field 1
+    {'labelkey':'another_label','inputkey':'text'}, // field 2
     ]; // сохраняем массив
 
     function createFormContent(formH){                                            // создает контент для помещения в форму. Принимает один хэш поля формы
           for(var key in formH){ // перебираем ключи внутри строки
             switch(key){
-              case 'labelkeys': // Проверяем, если это labelkeys
+              case 'labelkey': // Проверяем, если это labelkeys
                 // console.log(formH[key],'i=',i)
                 if (formH[key]){
                   var elem = document.createElement('label'); // создаем элемент label, сохраняем в переменную elem
                   var elemContent = document.createTextNode(formH[key]); // создаем текстовый узел
-                  var elemInput = document.createElement('input'); // создаем поле инпут
+                  // var elemInput = document.createElement('input'); // создаем поле инпут
                   elem.appendChild(elemContent);
-                  elem.appendChild(elemInput);
+                  // elem.appendChild(elemInput);
                 }
-                else elem = '';
+                case 'inputkey': // Проверяем, если это inputkey
+                  var inputkeyVal = formH[key]; // сохраняем значение ключа inputkey;
+                  if ((inputkeyVal = 'text') || (inputkeyVal = 'password')){ // текстовое поле
+                    var elemInput = document.createElement('input') // создаем элемент инпут
+                    // вопрос - как задать атрибуты инпута?
+tese                  }
+                // else elem = document.createElement('input');
                 console.log(elem);
             }
                 //content+=elem;

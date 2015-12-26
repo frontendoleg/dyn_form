@@ -9,52 +9,90 @@
 
     <script>
     var formAh = [
-    {'inputtype':'text','label':null,'name':null,'value':null,'selected':null,'checked':null,}, // field 0
-    {'inputtype':'password','label':null,'name':null,'value':null,'selected':null,'checked':null,}, // field 1
-    {'inputtype':'radio','label':null,'name':null,'value':null,'selected':null,'checked':null,}, // field 2
+    {'inputtype':'select','label':'label1','name':'name1','value':null,'selected':'selected','checked':null,}, // field 0
+    {'inputtype':'password','label':null,'name':'name2','value':null,'selected':null,'checked':null,}, // field 1
+    {'inputtype':'radio','label':'label3','name':'name3','value':null,'selected':null,'checked':null,}, // field 2
     ]; // сохраняем массив
 
-    function createFormContent(formH){// создает контент для помещения в форму. Принимает один хэш поля формы
+    function createFormElements(inputtypeV, labelV, nameV, valueV, selectedV, checkedV){
+      // возвращает сконструированный элемент
+      var elem = null;
+      if((inputtypeV == 'text') || (inputtypeV == 'password')){
+        if(labelV){
+          console.log('text+label');
+          var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
+          var elemLabelContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
+          elemLabel.appendChild(elemLabelContent); // текстовый элемент помещаем внутрь label
+          var elemInput = document.createElement('input'); // создаем элемент input
+          elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение inputtypeV
+          elemLabel.appendChild(elemInput); // элемент input помещаем внутрь элемента label
+          elem = elemLabel; // помещаем готовый элемент в переменную elem
+        }
+        else{
+          console.log('text only');
+          elem = document.createElement('input');
+          elem.setAttribute('type',inputtypeV); // задаем атрибуту type значение password
+
+          // alert(elem.getAttribute('type')); // как задать атрибуты инпута?
+        }
+      } // /text
+
+      if(inputtypeV == 'radio'){
+          console.log('radio');
+      }
+
+      if(inputtypeV == 'checkbox'){
+          console.log('checkbox');
+      }
+
+      if(inputtypeV == 'select'){
+          console.log('select');
+      }
+      if(inputtypeV == 'submit'){
+          console.log('submit');
+      }
+    return elem;
+    }
+
+    function parseCreateFormContent(formH){// создает контент для помещения в форму. Принимает один хэш поля формы
           var inputtypeV = null, labelV = null, nameV = null, valueV = null, selectedV = null, checkedV = null;
           // подготоавлваем переменные для парсинга хэша внутри строки
           for(var key in formH){ // перебираем ключи внутри строки
             switch(key){
-              case 'inputtype': {
+              case 'inputtype':
                 inputtypeV = formH[key];
-              }
+                break;
 
-              case 'label': {
+              case 'label':
                 labelV = formH[key];
-              }
+                break;
 
-              case 'name': {
+              case 'name':
                 nameV = formH[key];
-              }
+                break;
 
-              case 'value': {
+              case 'value':
                 valueV = formH[key];
-              }
+                break;
 
-              case 'selected': {
+              case 'selected':
                 selectedV = formH[key];
-              }
+                break;
 
-              case 'checked': {
+              case 'checked':
                 checkedV = formH[key];
-              }
+                break;
             } // /switch
-          console.log(inputtypeV);
           } // /for
-
-      /*return elem;*/
-
+          var cFE = createFormElements(inputtypeV, labelV, nameV, valueV, selectedV, checkedV);
+        return cFE; // возвращает вызов функции createFormElements
     } // /function createFormContent
 
     function demofillForm(dataFormAh,nameForm){
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
         var formH = dataFormAh[i]; // берем конкретный хэш
-        console.log (formH);
-        createFormContent(formH);
+
+        parseCreateFormContent(formH);
 
       }
     }
@@ -63,7 +101,7 @@
       var formElement = document.forms[nameForm]; // мы находим нужную форму по имени
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
         var formH = dataFormAh[i]; // берем конкретный хэш
-        console.log (formH);
+        //console.log (formH);
         formElement.appendChild(createFormContent(formH));
         brElement = document.createElement('br');
         formElement.appendChild(brElement);// добавляем дочерний элемент в форму

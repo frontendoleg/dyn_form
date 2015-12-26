@@ -9,38 +9,56 @@
 
     <script>
     var formAh = [
-    {'labelkey':null,'inputkey':'text'}, // field 0
-    {'labelkey':'label2','inputkey':'text'}, // field 1
-    {'labelkey':'another_label','inputkey':'text'}, // field 2
+    {'inputtype':null,'label':null,'name':null,'value':null,'selected':null,'checked':null,}, // field 0
+    {'inputtype':null,'label':null,'name':null,'value':null,'selected':null,'checked':null,}, // field 1
+    {'inputtype':null,'label':null,'name':null,'value':null,'selected':null,'checked':null,}, // field 2
     ]; // сохраняем массив
 
-    function createFormContent(formH){                                            // создает контент для помещения в форму. Принимает один хэш поля формы
+    function createFormContent(formH){// создает контент для помещения в форму. Принимает один хэш поля формы
+          var inputtypeV = null, labelV = null, nameV = null, valueV = null, selectedV = null, checkedV = null;
+          // подготоавлваем переменные для парсинга хэша внутри строки
           for(var key in formH){ // перебираем ключи внутри строки
             switch(key){
-              case 'labelkey': // Проверяем, если это labelkeys
-                // console.log(formH[key],'i=',i)
-                if (formH[key]){
-                  var elem = document.createElement('label'); // создаем элемент label, сохраняем в переменную elem
-                  var elemContent = document.createTextNode(formH[key]); // создаем текстовый узел
-                  // var elemInput = document.createElement('input'); // создаем поле инпут
-                  elem.appendChild(elemContent);
-                  // elem.appendChild(elemInput);
-                }
-                case 'inputkey': // Проверяем, если это inputkey
-                  var inputkeyVal = formH[key]; // сохраняем значение ключа inputkey;
-                  if ((inputkeyVal = 'text') || (inputkeyVal = 'password')){ // текстовое поле
-                    var elemInput = document.createElement('input') // создаем элемент инпут
-                    // вопрос - как задать атрибуты инпута?
-tese                  }
-                // else elem = document.createElement('input');
-                console.log(elem);
-            }
-                //content+=elem;
+              case 'inputtype': {
+                inputtypeV = formH[key];
+              }
 
-                  //console.log(content);
-          }
-      return elem;
+              case 'label': {
+                labelV = formH[key];
+              }
+
+              case 'name': {
+                nameV = formH[key];
+              }
+
+              case 'value': {
+                valueV = formH[key];
+              }
+
+              case 'selected': {
+                selectedV = formH[key];
+              }
+
+              case 'checked': {
+                checkedV = formH[key];
+              }
+            } // /switch
+          console.log(inputtypeV);
+          } // /for
+
+      /*return elem;*/
+
+    } // /function createFormContent
+
+    function demofillForm(dataFormAh,nameForm){
+      for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
+        var formH = dataFormAh[i]; // берем конкретный хэш
+        console.log (formH);
+        createFormContent(formH);
+
+      }
     }
+
     function fillForm(dataFormAh,nameForm){ // заполняет форму подготовленным контентом. Принимает массив хэшей, имя формы
       var formElement = document.forms[nameForm]; // мы находим нужную форму по имени
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
@@ -52,7 +70,7 @@ tese                  }
       }
     }
 
-    fillForm (formAh,'myform'); // вызов функции заполнения формы. На вход функции даем наш массив, имя нашей формы.
+    demofillForm (formAh,'myform'); // вызов функции заполнения формы. На вход функции даем наш массив, имя нашей формы.
 
     </script>
   </body>

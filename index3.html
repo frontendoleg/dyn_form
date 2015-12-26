@@ -17,7 +17,7 @@
     {'inputtype':'text','label':'E-mail для связи:','name':'name3','value':null,'selected':null,'checked':null,}, // field 5
     {'inputtype':'select','label':'Рубрика каталога:','name':'name3','option':['здоровье','домашний уют','бытовая техника'],
       'value':[1,2,3],'selected':[null,null,'selected'],'checked':null,}, // field 6
-    {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 7
+    {'inputtype':'radio','label':'Размещение:','name':'name3','value':null,'selected':null,'checked':null,}, // field 7
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 8
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 9
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
@@ -30,37 +30,41 @@
 
     function createFormElements(inputtypeV, labelV, nameV, valueV, selectedV, checkedV){
       // возвращает сконструированный элемент
-      var elem = null;
+      var elem = [];
       if((inputtypeV == 'text') || (inputtypeV == 'password')){
         if(labelV){
-          console.log('text+label');
+          //console.log('text+label');
           var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
           var elemLabelContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
           elemLabel.appendChild(elemLabelContent); // текстовый элемент помещаем внутрь label
           var elemInput = document.createElement('input'); // создаем элемент input
           elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение inputtypeV
           elemLabel.appendChild(elemInput); // элемент input помещаем внутрь элемента label
-          elem = elemLabel; // помещаем готовый элемент в переменную elem
+          elem[0] = elemLabel; // помещаем готовый элемент в переменную elem
         }
         else{
           console.log('text only');
-          elem = document.createElement('input');
-          elem.setAttribute('type',inputtypeV); // задаем атрибуту type значение password
+          var elemInput = document.createElement('input');
+          elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение password
+          elem[0] = elemInput;
 
           // alert(elem.getAttribute('type')); // как задать атрибуты инпута?
         }
       } // /text
 
-      if(inputtypeV == 'radio'){
-          console.log('radio');
-      }
+      //if(inputtypeV == 'radio'){
+      //    console.log('radio');
+      //    if(labelV){
+      //      var elemLabel = document.
+      //    }
+      //}
 
       if(inputtypeV == 'checkbox'){
           console.log('checkbox');
       }
 
       if(inputtypeV == 'select'){
-          console.log('select');
+          //console.log('select');
           var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
           var elemSpanContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
           elemSpan.appendChild(elemSpanContent); // текстовый элемент помещаем внутрь span
@@ -76,7 +80,8 @@
             }
           elemSelect.appendChild(elemOption); // добавляем элемент option внутрь select
           }
-          elem = elemSelect; // а как добавить span
+          elem[1] = elemSpan;
+          elem[0] = elemSelect; // а как добавить span
       }
       if(inputtypeV == 'submit'){
           console.log('submit');
@@ -136,7 +141,11 @@
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
         var formH = dataFormAh[i]; // берем конкретный хэш
         //console.log (formH);
-        formElement.appendChild(parseCreateFormContent(formH));
+        var elem = parseCreateFormContent(formH) //  элемент строки формы, это массив из elem[0] и elem[1]
+        formElement.appendChild(elem[0]); // добавляем дочерний elem[0], если один элемент
+        if(elem[1]){
+          formElement.insertBefore(elem[1],elem[0]); // добавляем второй элемент если есть
+        }
         brElement = document.createElement('br');
         formElement.appendChild(brElement);// добавляем дочерний элемент в форму
       }

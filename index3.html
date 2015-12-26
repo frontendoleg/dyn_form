@@ -9,9 +9,9 @@
 
     <script>
     var formAh = [
-    {'inputtype':'select','label':'label1','name':'name1','value':null,'selected':'selected','checked':null,}, // field 0
+    {'inputtype':'text','label':'label1','name':'name1','value':null,'selected':'selected','checked':null,}, // field 0
     {'inputtype':'password','label':null,'name':'name2','value':null,'selected':null,'checked':null,}, // field 1
-    {'inputtype':'radio','label':'label3','name':'name3','value':null,'selected':null,'checked':null,}, // field 2
+    {'inputtype':'text','label':'label3','name':'name3','value':null,'selected':null,'checked':null,}, // field 2
     ]; // сохраняем массив
 
     function createFormElements(inputtypeV, labelV, nameV, valueV, selectedV, checkedV){
@@ -92,7 +92,7 @@
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
         var formH = dataFormAh[i]; // берем конкретный хэш
 
-        parseCreateFormContent(formH);
+        alert(parseCreateFormContent(formH));
 
       }
     }
@@ -102,13 +102,13 @@
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
         var formH = dataFormAh[i]; // берем конкретный хэш
         //console.log (formH);
-        formElement.appendChild(createFormContent(formH));
+        formElement.appendChild(parseCreateFormContent(formH));
         brElement = document.createElement('br');
         formElement.appendChild(brElement);// добавляем дочерний элемент в форму
       }
     }
 
-    demofillForm (formAh,'myform'); // вызов функции заполнения формы. На вход функции даем наш массив, имя нашей формы.
+    fillForm (formAh,'myform'); // вызов функции заполнения формы. На вход функции даем наш массив, имя нашей формы.
 
     </script>
   </body>

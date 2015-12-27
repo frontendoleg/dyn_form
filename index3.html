@@ -106,13 +106,12 @@
 
 
           elemSelect = document.createElement('select'); // создаем элемент select, сохраняем в переменную elemSelect
+          elemSelect.setAttribute('name', nameV); // значение name нужно указать только для тэга Select
           for(var i=0; i<optionV.length; i++){
             var elemOption = document.createElement('option'); // создаем элемент option, сохраняем в переменную elemOption
             var elemOptionContent = document.createTextNode(optionV[i]); // создаем текстовый узел с содержимым Option
             elemOption.appendChild(elemOptionContent); // помещаем содержимое в option
-            elemOption.setAttribute('name', nameV); // задаем атрибуту name значение nameV
             elemOption.setAttribute('value', valueV[i]); // добавляем атрибут value
-            console.log(elemOption.getAttribute('name'));
 
             if(selectedV[i]){
               elemOption.setAttribute('selected', 'selected'); // добавим атрибут selected если есть

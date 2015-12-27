@@ -17,7 +17,7 @@
     {'inputtype':'text','label':'E-mail для связи:','name':'email','value':null,'selected':null,'checked':null,}, // field 5
     {'inputtype':'select','label':'Рубрика каталога:','name':'rubric','option':['здоровье','домашний уют','бытовая техника'],
       'value':[1,2,3],'selected':[null,null,'selected'],'checked':null,}, // field 6
-    {'inputtype':'radio','label':'Размещение:','name':'public','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
+    {'inputtype':'radio','label':'Размещение:','name':'publication','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
     {'inputtype':'checkbox','label':'Разрешить отзывы:','name':'comments','value':null,'selected':null,'checked':'checked',}, // field 8
     {'inputtype':'textarea','label':'Описание сайта:','name':'description','value':null,'selected':null,'checked':null,}, // field 9
     {'inputtype':'submit','label':'Опубликовать','name':'name3','value':'Опубликовать','selected':null,'checked':null,}, // field 10
@@ -68,6 +68,7 @@
               var elemInput = document.createElement('input'); // создаем элемент input, сохраняем в переменную elemInput
               elemInput.setAttribute('type', inputtypeV); // задаем атрибуту type значение radio
               elemInput.setAttribute('name', nameV); // задаем атрибуту name значение public
+              elemInput.setAttribute('value', valueV[i]);
               var elemLabelContent = document.createTextNode(optionV[i]); // создаем текстовый узел с содержимым option
               elemLabel.appendChild(elemInput); // элемент input помещаем внутрь тэга label
               elemLabel.appendChild(elemLabelContent); // элемент LabelContent помещаем внутрь тэга label
@@ -109,8 +110,10 @@
             var elemOption = document.createElement('option'); // создаем элемент option, сохраняем в переменную elemOption
             var elemOptionContent = document.createTextNode(optionV[i]); // создаем текстовый узел с содержимым Option
             elemOption.appendChild(elemOptionContent); // помещаем содержимое в option
-            elemOption.setAttribute('value', valueV[i]); // добавляем атрибут value
             elemOption.setAttribute('name', nameV); // задаем атрибуту name значение nameV
+            elemOption.setAttribute('value', valueV[i]); // добавляем атрибут value
+            console.log(elemOption.getAttribute('name'));
+
             if(selectedV[i]){
               elemOption.setAttribute('selected', 'selected'); // добавим атрибут selected если есть
             }

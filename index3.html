@@ -9,16 +9,16 @@
 
     <script>
     var formAh = [
-    {'inputtype':'text','label':'Разработчики:','name':'name1','value':null,'selected':'selected','checked':null,}, // field 0
-    {'inputtype':'text','label':'Название сайта:','name':'name2','value':null,'selected':null,'checked':null,}, // field 1
-    {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 2
-    {'inputtype':'text','label':'Дата запуска сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 3
-    {'inputtype':'text','label':'Посетителей в сутки:','name':'name3','value':null,'selected':null,'checked':null,}, // field 4
-    {'inputtype':'text','label':'E-mail для связи:','name':'name3','value':null,'selected':null,'checked':null,}, // field 5
-    {'inputtype':'select','label':'Рубрика кталога:','name':'name3','option':['здоровье','домашний уют','бытовая техника'],
+    {'inputtype':'text','label':'Разработчики:','name':'developers','value':null,'selected':'selected','checked':null,}, // field 0
+    {'inputtype':'text','label':'Название сайта:','name':'sitename','value':null,'selected':null,'checked':null,}, // field 1
+    {'inputtype':'text','label':'URL сайта:','name':'url','value':null,'selected':null,'checked':null,}, // field 2
+    {'inputtype':'text','label':'Дата запуска сайта:','name':'data','value':null,'selected':null,'checked':null,}, // field 3
+    {'inputtype':'text','label':'Посетителей в сутки:','name':'visiters','value':null,'selected':null,'checked':null,}, // field 4
+    {'inputtype':'text','label':'E-mail для связи:','name':'email','value':null,'selected':null,'checked':null,}, // field 5
+    {'inputtype':'select','label':'Рубрика каталога:','name':'rubric','option':['здоровье','домашний уют','бытовая техника'],
       'value':[1,2,3],'selected':[null,null,'selected'],'checked':null,}, // field 6
     {'inputtype':'radio','label':'Размещение:','name':'public','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
-    {'inputtype':null,'label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 8
+    {'inputtype':'checkbox','label':'Разрешить отзывы:','name':'comments','value':null,'selected':null,'checked':'checked',}, // field 8
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 9
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 11
@@ -39,6 +39,7 @@
           elemLabel.appendChild(elemLabelContent); // текстовый элемент помещаем внутрь label
           var elemInput = document.createElement('input'); // создаем элемент input
           elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение inputtypeV
+          elemInput.setAttribute('name', nameV); // задаем атрибуту name значение nameV
           elemLabel.appendChild(elemInput); // элемент input помещаем внутрь элемента label
           elem[0] = elemLabel; // помещаем готовый элемент в переменную elem
         }
@@ -80,6 +81,18 @@
 
       if(inputtypeV == 'checkbox'){
           console.log('checkbox');
+          var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
+          var elemLabelContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
+          elemLabel.appendChild(elemLabelContent); // текстовый элемент помещаем внутрь label
+          var elemInput = document.createElement('input'); // создаем элемент input
+          elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение inputtypeV
+          elemInput.setAttribute('name', nameV); // задаем атрибуту name значение nameV
+          if(checkedV){
+            elemInput.setAttribute('checked',checkedV); // если есть задаем атрибут checked
+          }
+          elemLabel.appendChild(elemInput); // элемент input помещаем внутрь элемента label
+          elem[0] = elemLabel; // помещаем готовый элемент в переменную elem
+
       }
 
       if(inputtypeV == 'select'){
@@ -98,6 +111,7 @@
             var elemOptionContent = document.createTextNode(optionV[i]); // создаем текстовый узел с содержимым Option
             elemOption.appendChild(elemOptionContent); // помещаем содержимое в option
             elemOption.setAttribute('value', valueV[i]); // добавляем атрибут value
+            elemOption.setAttribute('name', nameV); // задаем атрибуту name значение nameV
             if(selectedV[i]){
               elemOption.setAttribute('selected', 'selected'); // добавим атрибут selected если есть
             }

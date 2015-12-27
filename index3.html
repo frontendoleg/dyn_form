@@ -17,7 +17,7 @@
     {'inputtype':'text','label':'E-mail для связи:','name':'name3','value':null,'selected':null,'checked':null,}, // field 5
     {'inputtype':'select','label':'Рубрика каталога:','name':'name3','option':['здоровье','домашний уют','бытовая техника'],
       'value':[1,2,3],'selected':[null,null,'selected'],'checked':null,}, // field 6
-    {'inputtype':'radio','label':'Размещение:','name':'name3','value':null,'selected':null,'checked':null,}, // field 7
+    {'inputtype':'radio','label':'Размещение:','name':'public','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 8
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 9
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
@@ -52,12 +52,25 @@
         }
       } // /text
 
-      //if(inputtypeV == 'radio'){
-      //    console.log('radio');
-      //    if(labelV){
-      //      var elemLabel = document.
-      //    }
-      //}
+      if(inputtypeV == 'radio'){
+          console.log('radio');
+          if(labelV){
+            var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
+            for(i=0; i<valueV.length; i++){
+
+              var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
+              var elemInput = document.createElement('input'); // создаем элемент input, сохраняем в переменную elemInput
+              elemInput.setAttribute('type', inputtypeV); // задаем атрибуту type значение radio
+              elemInput.setAttribute('name', nameV); // задаем атрибуту name значение public
+              var elemLabelContent = document.createTextNode(optionV[i]); // создаем текстовый узел с содержимым option
+              elemLabel.appendChild(elemInput); // элемент input помещаем внутрь тэга label
+              elemLabel.appendChild(elemLabelContent); // элемент LabelContent помещаем внутрь тэга label
+              elemSpan.appendChild(elemLabel); // добавляем радиокнопку в элемент span
+            }
+
+            elem[0] = elemSpan;
+          }
+      }
 
       if(inputtypeV == 'checkbox'){
           console.log('checkbox');

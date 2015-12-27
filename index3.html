@@ -20,7 +20,7 @@
     {'inputtype':'radio','label':'Размещение:','name':'public','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
     {'inputtype':'checkbox','label':'Разрешить отзывы:','name':'comments','value':null,'selected':null,'checked':'checked',}, // field 8
     {'inputtype':'textarea','label':'Описание сайта:','name':'description','value':null,'selected':null,'checked':null,}, // field 9
-    {'inputtype':'submit','label':'Опубликовать','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
+    {'inputtype':'submit','label':'Опубликовать','name':'name3','value':'Опубликовать','selected':null,'checked':null,}, // field 10
     ]; // сохраняем массив
 
 // {'inputtype':'select','label':'Рубрика:','option':['компьютерная техника','дизайн','программирование'],'value':[1,2,3],
@@ -131,6 +131,10 @@
 
       if(inputtypeV == 'submit'){
           console.log('submit');
+          var elemInput = document.createElement('input'); // создаем элемент input, сохраняем в переменную elemInput
+          elemInput.setAttribute('type', inputtypeV); // задаем атрибуту type значение submit
+          elemInput.setAttribute('value', valueV); // задаем атрибуту value значение valueV
+          elem[0] = elemInput;
       }
     return elem;
     }

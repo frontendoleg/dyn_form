@@ -15,10 +15,10 @@
     {'inputtype':'text','label':'Дата запуска сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 3
     {'inputtype':'text','label':'Посетителей в сутки:','name':'name3','value':null,'selected':null,'checked':null,}, // field 4
     {'inputtype':'text','label':'E-mail для связи:','name':'name3','value':null,'selected':null,'checked':null,}, // field 5
-    {'inputtype':'select','label':'Рубрика каталога:','name':'name3','option':['здоровье','домашний уют','бытовая техника'],
+    {'inputtype':'select','label':'Рубрика кталога:','name':'name3','option':['здоровье','домашний уют','бытовая техника'],
       'value':[1,2,3],'selected':[null,null,'selected'],'checked':null,}, // field 6
     {'inputtype':'radio','label':'Размещение:','name':'public','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
-    {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 8
+    {'inputtype':null,'label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 8
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 9
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
     {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 11
@@ -55,6 +55,12 @@
       if(inputtypeV == 'radio'){
           console.log('radio');
           if(labelV){
+            var elemSpanTitle = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpanTitle
+            var elemSpanTitileContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
+            elemSpanTitle.appendChild(elemSpanTitileContent); // текстовый элемент помещаем внутрь span
+            elem[1] = elemSpanTitle;
+          }
+
             var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
             for(i=0; i<valueV.length; i++){
 
@@ -68,8 +74,8 @@
               elemSpan.appendChild(elemLabel); // добавляем радиокнопку в элемент span
             }
 
-            elem[0] = elemSpan;
-          }
+            elem[0] = elemSpan; // помещаем блок радиокнопок в elem[0]
+
       }
 
       if(inputtypeV == 'checkbox'){
@@ -78,9 +84,13 @@
 
       if(inputtypeV == 'select'){
           //console.log('select');
-          var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
-          var elemSpanContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
-          elemSpan.appendChild(elemSpanContent); // текстовый элемент помещаем внутрь span
+          if(labelV){
+            var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
+            var elemSpanContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
+            elemSpan.appendChild(elemSpanContent); // текстовый элемент помещаем внутрь span
+            elem[1] = elemSpan;
+          }
+
 
           elemSelect = document.createElement('select'); // создаем элемент select, сохраняем в переменную elemSelect
           for(var i=0; i<optionV.length; i++){
@@ -93,7 +103,6 @@
             }
           elemSelect.appendChild(elemOption); // добавляем элемент option внутрь select
           }
-          elem[1] = elemSpan;
           elem[0] = elemSelect; // а как добавить span
       }
       if(inputtypeV == 'submit'){

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
   <head>
     <meta charset = 'utf-8'>
-    <title>Dyn_Form_New_Function</title>
+    <title>Dyn_Form_Function</title>
   </head>
   <body>
     <form name = 'myform' method = 'get' action = 'http://fe.it-academy.by/TestForm.php'> <!-- имя метод и экшн для формы -->
@@ -23,12 +23,12 @@
     {'inputtype':'submit','label':'Опубликовать','name':'name3','value':'Опубликовать','selected':null,'checked':null,}, // field 10
     ]; // сохраняем массив
 
-// {'inputtype':'select','label':'Рубрика:','option':['компьютерная техника','дизайн','программирование'],'value':[1,2,3],
-// 'selected':[null,null,'selected'],} - option,value,selected - соответствующие массивы
-
 
     function createFormElements(inputtypeV, labelV, nameV, valueV, selectedV, checkedV){
       // возвращает сконструированный элемент
+      // аргументы - результат парсинга строки хэша
+      // elem[0] - основной элемент формы
+      // elem[1] - необязательный, дополнительный элемент формы, подпись например
       var elem = [];
       if((inputtypeV == 'text') || (inputtypeV == 'password')){
         if(labelV){
@@ -47,28 +47,24 @@
           var elemInput = document.createElement('input');
           elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение password
           elem[0] = elemInput;
-
-          // alert(elem.getAttribute('type')); // как задать атрибуты инпута?
         }
       } // /text
 
       if(inputtypeV == 'radio'){
-          //console.log('radio');
           if(labelV){
             var elemSpanTitle = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpanTitle
             var elemSpanTitileContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
             elemSpanTitle.appendChild(elemSpanTitileContent); // текстовый элемент помещаем внутрь span
             elem[1] = elemSpanTitle;
-          }
+          } // работает при labelV = 'mylabel' и при labelV = null
 
             var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
             for(i=0; i<valueV.length; i++){
-
               var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
               var elemInput = document.createElement('input'); // создаем элемент input, сохраняем в переменную elemInput
               elemInput.setAttribute('type', inputtypeV); // задаем атрибуту type значение radio
               elemInput.setAttribute('name', nameV); // задаем атрибуту name значение public
-              elemInput.setAttribute('value', valueV[i]);
+              elemInput.setAttribute('value', valueV[i]); // задаем атрибуту value значение из массива valueV
               var elemLabelContent = document.createTextNode(optionV[i]); // создаем текстовый узел с содержимым option
               elemLabel.appendChild(elemInput); // элемент input помещаем внутрь тэга label
               elemLabel.appendChild(elemLabelContent); // элемент LabelContent помещаем внутрь тэга label
@@ -77,10 +73,9 @@
 
             elem[0] = elemSpan; // помещаем блок радиокнопок в elem[0]
 
-      }
+      }  // /radio
 
       if(inputtypeV == 'checkbox'){
-          //console.log('checkbox');
           var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
           var elemLabelContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
           elemLabel.appendChild(elemLabelContent); // текстовый элемент помещаем внутрь label
@@ -93,16 +88,15 @@
           elemLabel.appendChild(elemInput); // элемент input помещаем внутрь элемента label
           elem[0] = elemLabel; // помещаем готовый элемент в переменную elem
 
-      }
+      } // /checkbox
 
       if(inputtypeV == 'select'){
-          //console.log('select');
           if(labelV){
             var elemSpan = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpan
             var elemSpanContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
             elemSpan.appendChild(elemSpanContent); // текстовый элемент помещаем внутрь span
             elem[1] = elemSpan;
-          }
+          } // работает при labelV = 'mylabel' и при labelV = null
 
 
           elemSelect = document.createElement('select'); // создаем элемент select, сохраняем в переменную elemSelect
@@ -119,17 +113,20 @@
           elemSelect.appendChild(elemOption); // добавляем элемент option внутрь select
           }
           elem[0] = elemSelect; // а как добавить span
-      }
+
+      } // /select
+
+
       if(inputtypeV == 'textarea'){
-          console.log('textarea');
           var elemTextarea = document.createElement('textarea'); // создаем элемент textarea, сохранякм в переменную elemTextarea
           elemTextarea.setAttribute('name', nameV); // задаем атрибуту name значение nameV
           elem[0] = elemTextarea;
           var elemP = document.createElement('p'); // создаем элемент p, сохраняем в переменную elemP
           var elemPContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым labelV
           elemP.appendChild(elemPContent); // помещаем содержимое в elemP
-          elem[1] = elemP;
-      }
+          elem[1] = elemP; // подпись
+
+      } // /textarea
 
       if(inputtypeV == 'submit'){
           console.log('submit');
@@ -137,8 +134,10 @@
           elemInput.setAttribute('type', inputtypeV); // задаем атрибуту type значение submit
           elemInput.setAttribute('value', valueV); // задаем атрибуту value значение valueV
           elem[0] = elemInput;
-      }
-    return elem;
+
+      } // /submit
+
+    return elem; // возвращаем сгенерированный элемент формы в массиве elem[0], elem[1]
     }
 
     function parseCreateFormContent(formH){// создает контент для помещения в форму. Принимает один хэш поля формы
@@ -179,27 +178,18 @@
         return cFE; // возвращает вызов функции createFormElements
     } // /function createFormContent
 
-    function demofillForm(dataFormAh,nameForm){
-      for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
-        var formH = dataFormAh[i]; // берем конкретный хэш
-
-        alert(parseCreateFormContent(formH));
-
-      }
-    }
 
     function fillForm(dataFormAh,nameForm){ // заполняет форму подготовленным контентом. Принимает массив хэшей, имя формы
       var formElement = document.forms[nameForm]; // мы находим нужную форму по имени
       for(var i = 0; i < dataFormAh.length; i++){ // перебираем массив хэшей
         var formH = dataFormAh[i]; // берем конкретный хэш
-        //console.log (formH);
         var elem = parseCreateFormContent(formH) //  элемент строки формы, это массив из elem[0] и elem[1]
         formElement.appendChild(elem[0]); // добавляем дочерний elem[0], если один элемент
         if(elem[1]){
           formElement.insertBefore(elem[1],elem[0]); // добавляем второй элемент если есть
         }
-        brElement = document.createElement('br');
-        formElement.appendChild(brElement);// добавляем дочерний элемент в форму
+        brElement = document.createElement('br'); // создаем элемент <br>
+        formElement.appendChild(brElement);// добавляем дочерний элемент <br> в форму
       }
     }
 

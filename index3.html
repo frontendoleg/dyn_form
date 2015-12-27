@@ -44,7 +44,7 @@
           elem[0] = elemLabel; // помещаем готовый элемент в переменную elem
         }
         else{
-          console.log('text only');
+          //console.log('text only');
           var elemInput = document.createElement('input');
           elemInput.setAttribute('type',inputtypeV); // задаем атрибуту type значение password
           elem[0] = elemInput;
@@ -54,7 +54,7 @@
       } // /text
 
       if(inputtypeV == 'radio'){
-          console.log('radio');
+          //console.log('radio');
           if(labelV){
             var elemSpanTitle = document.createElement('span'); // создаем элемент span, сохраняем в переменную elemSpanTitle
             var elemSpanTitileContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
@@ -80,7 +80,7 @@
       }
 
       if(inputtypeV == 'checkbox'){
-          console.log('checkbox');
+          //console.log('checkbox');
           var elemLabel = document.createElement('label'); // создаем элемент label, сохраняем в переменную elemLabel
           var elemLabelContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым Label
           elemLabel.appendChild(elemLabelContent); // текстовый элемент помещаем внутрь label

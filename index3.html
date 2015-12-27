@@ -19,9 +19,8 @@
       'value':[1,2,3],'selected':[null,null,'selected'],'checked':null,}, // field 6
     {'inputtype':'radio','label':'Размещение:','name':'public','option':['бесплатное','платное','VIP'],'value':[1,2,3],'selected':null,'checked':null,}, // field 7
     {'inputtype':'checkbox','label':'Разрешить отзывы:','name':'comments','value':null,'selected':null,'checked':'checked',}, // field 8
-    {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 9
-    {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
-    {'inputtype':'text','label':'URL сайта:','name':'name3','value':null,'selected':null,'checked':null,}, // field 11
+    {'inputtype':'textarea','label':'Описание сайта:','name':'description','value':null,'selected':null,'checked':null,}, // field 9
+    {'inputtype':'submit','label':'Опубликовать','name':'name3','value':null,'selected':null,'checked':null,}, // field 10
     ]; // сохраняем массив
 
 // {'inputtype':'select','label':'Рубрика:','option':['компьютерная техника','дизайн','программирование'],'value':[1,2,3],
@@ -119,6 +118,17 @@
           }
           elem[0] = elemSelect; // а как добавить span
       }
+      if(inputtypeV == 'textarea'){
+          console.log('textarea');
+          var elemTextarea = document.createElement('textarea'); // создаем элемент textarea, сохранякм в переменную elemTextarea
+          elemTextarea.setAttribute('name', nameV); // задаем атрибуту name значение nameV
+          elem[0] = elemTextarea;
+          var elemP = document.createElement('p'); // создаем элемент p, сохраняем в переменную elemP
+          var elemPContent = document.createTextNode(labelV); // создаем текстовый узел с содержимым labelV
+          elemP.appendChild(elemPContent); // помещаем содержимое в elemP
+          elem[1] = elemP;
+      }
+
       if(inputtypeV == 'submit'){
           console.log('submit');
       }
